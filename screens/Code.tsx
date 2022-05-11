@@ -14,12 +14,12 @@ import {
 import Task from '../components/Tasks.js'
 import React, { useState } from 'react'
 
-interface LinkScreenProps {
-    navigation: any
+interface CodeScreenProps {
+    navigation: any,
     route: { params }
 }
 
-export default function Link(props: LinkScreenProps) {
+export default function Code (props: CodeScreenProps) {
     const [task, setTask] = useState(String)
     const [taskItems, setTaskItems] = useState([])
     const [open, setOpen] = useState(false)
@@ -27,11 +27,11 @@ export default function Link(props: LinkScreenProps) {
     const socials = ['Instagram', 'Snapchat', 'Twitter']
     const socialLinks = []
 
-    const handleAddTask = () => {
+    const handleDeleteTask = () => {
         console.log(task)
         Keyboard.dismiss()
         if (task != null) {
-            props.route.params.link = link
+            props.route.params.link = '';
             console.log(props.route.params.link)
             console.log(props.route.params)
             props.navigation.navigate('Home', props.route.params)
@@ -41,28 +41,24 @@ export default function Link(props: LinkScreenProps) {
         }
     }
 
-    const [link, setLink] = useState('')
 
     return (
         <View style={styles.container}>
             <View style={styles.container}>
                 {/* Socials*/}
                 <View style={styles.taskWrapper}>
-                    <Text style={styles.sectionTitle}>Add a Link</Text>
-                    <Text style={styles.socialTitle}>
-                        ~ {props.route.params.social}
-                    </Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder={'Insert link here'}
-                        value={link}
-                        onChangeText={(text) => setLink(text)}
-                    />
+                    <Text style={styles.sectionTitle}>Exchange it!</Text>
                 </View>
             </View>
             <Pressable
+                style={[styles.button, styles.deletebuttonClose]}
+                onPress={() => handleDeleteTask()}
+            >
+                <Text style={styles.textStyle}>Delete</Text>
+            </Pressable>
+            <Pressable
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => handleAddTask()}
+                onPress={() => props.navigation.navigate('Home', props.route.params)}
             >
                 <Text style={styles.textStyle}>Done</Text>
             </Pressable>
@@ -106,10 +102,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
-    socialTitle: {
-        marginTop: 20,
-        fontSize: 20,
-    },
     items: {
         marginTop: 30,
     },
@@ -123,13 +115,13 @@ const styles = StyleSheet.create({
     },
     input: {
         paddingVertical: 15,
-        width: 370,
+        width: 350,
         marginTop: 20,
         paddingHorizontal: 15,
         backgroundColor: '#FFF',
         borderRadius: 60,
         borderColor: '#C0C0C0',
-        borderWidth: 2,
+        borderWidth: 1,
     },
     addWrapper: {
         width: 300,
@@ -178,6 +170,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#2196F3',
         position: 'absolute',
         bottom: 60,
+        left: '10%',
+        width: '80%',
+        height: 60,
+
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    deletebuttonClose: {
+        backgroundColor: '#F31B1B',
+        position: 'absolute',
+        bottom: 130,
         left: '10%',
         width: '80%',
         height: 60,

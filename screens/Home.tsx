@@ -17,35 +17,35 @@ import React, { useState } from 'react'
 import AppNavigator from '../app.navigator'
 
 interface HomeScreenProps {
-    navigation: any
+    navigation: any,
+    route: { params }
 }
 
 export default function Home(props: HomeScreenProps) {
     const [task, setTask] = useState()
     const [taskItems, setTaskItems] = useState([])
-    const [open, setOpen] = useState(false)
-    const [openSocial, setOpenSocial] = useState(false)
     const socials = ['Instagram', 'Snapchat', 'Twitter']
-    const socialLinks = []
+    const [socialLinks, setLinks] = useState([
+        {social: 'Instagram', id: 0, link: ''},
+        {social: 'Snapchat', id: 1, link: ''},
+        {social: 'Twitter', id: 2, link: ''},
+    ]);
 
-    const handleAddTask = () => {
-        props.navigation.navigate('Social')
+    const handleAddTask = (socialLinks) => {
+        console.log(socialLinks);
+        props.navigation.navigate('Social', socialLinks);
     }
 
-    const completeTask = (index) => {
-        let itemsCopy = [...taskItems]
-        itemsCopy.splice(index, 1)
-        setTaskItems(itemsCopy)
-        {
-            /*COpy taskItems into itemsCopy, splice pops the index from array, 
-    set the remaining tasks into itemsCopy and call setTaskItems*/
-        }
-    }
-
-    const addSocial = (social) => {
-        console.log(social)
-        console.log(openSocial)
-        setOpenSocial(true)
+    const exchangeSocial = (item) => {
+    //     let itemsCopy = [...taskItems]
+    //     itemsCopy.splice(index, 1)
+    //     setTaskItems(itemsCopy)
+    //     {
+    //         /*Copy taskItems into itemsCopy, splice pops the index from array, 
+    // set the remaining tasks into itemsCopy and call setTaskItems*/
+    //     }
+    console.log(item);
+    props.navigation.navigate('Code', item);
     }
 
     return (
@@ -56,69 +56,31 @@ export default function Home(props: HomeScreenProps) {
                 <Text style={styles.sectionTitle}>Your Socials</Text>
                 <View style={styles.items}>
                     {/*This is where the tasks will go*/}
-                    {taskItems.map((item, index) => {
+                    {socialLinks.map((item, index) => { 
+                        console.log("Yoohoo")
+                        console.log(socialLinks)
+                        if(item.link){
                         return (
                             <TouchableOpacity
                                 key={index}
-                                onPress={() => completeTask(index)}
+                                onPress={() => exchangeSocial(item)}
                             >
-                                <Task text={item} />
+                                <Task text={item.social} />
                             </TouchableOpacity>
-                        )
+                        )}
                     })}
                 </View>
             </View>
 
             {/*Write a task*/}
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                style={styles.writeTaskWrapper}
-            >
-                {/* <TextInput style={styles.input} placeholder={'Write a Task'} value = {task} onChangeText={text => setTask(text)}/> */}
+            <View style={styles.writeTaskWrapper}>
                 {/* TouchableOpacity is a button */}
-                <TouchableOpacity onPress={() => handleAddTask()}>
+                <TouchableOpacity onPress={() => handleAddTask(socialLinks)}>
                     <View style={styles.addWrapper}>
                         <Text style={styles.addText}>Add an account</Text>
                     </View>
                 </TouchableOpacity>
-            </KeyboardAvoidingView>
-
-            {/*Modal for the social account */}
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={openSocial}
-                onRequestClose={() => {
-                    Alert.alert('Modal has been closed.')
-                    setOpen(false)
-                }}
-            >
-                <View style={styles.container}>
-                    {/* Socials*/}
-                    <View style={styles.taskWrapper}>
-                        <Text style={styles.sectionTitle}>Add link</Text>
-                        <View style={styles.items}>
-                            {/*This is where the tasks will go*/}
-                            {socials.map((social, index) => {
-                                return (
-                                    <TouchableOpacity
-                                        key={index}
-                                        onPress={() => addSocial(index)}
-                                    >
-                                        <Task text={social} />
-                                    </TouchableOpacity>
-                                )
-                            })}
-                        </View>
-                    </View>
-                </View>
-                <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setOpen(false)}
-                >
-                    <Text style={styles.textStyle}>Try again</Text>
-                </Pressable>
-            </Modal>
+            </View>
         </View>
     )
 }
@@ -159,7 +121,8 @@ const styles = StyleSheet.create({
     addWrapper: {
         width: 300,
         height: 60,
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
+        backgroundColor: '#2196F3',
         borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
@@ -167,8 +130,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     addText: {
-        fontSize: 24,
+        fontSize: 15,
         fontWeight: 'bold',
+        color: 'white',
     },
     centeredView: {
         flex: 1,

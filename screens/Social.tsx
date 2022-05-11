@@ -14,7 +14,8 @@ import Task from '../components/Tasks.js'
 import React, { useState } from 'react'
 
 interface SocialScreenProps {
-    navigation: any
+    navigation: any,
+    route: { params }
 }
 
 export default function Social(props: SocialScreenProps) {
@@ -23,12 +24,14 @@ export default function Social(props: SocialScreenProps) {
     const [open, setOpen] = useState(false)
     const [openSocial, setOpenSocial] = useState(false)
     const socials = ['Instagram', 'Snapchat', 'Twitter']
-    const socialLinks = []
+    // const socialLinks = []
 
-    const addSocial = () => {
-        console.log()
-        console.log(openSocial)
-        props.navigation.navigate('Link');
+    const addSocial = (index) => {
+        // console.log(socialLinks);
+        // console.log(social);
+        console.log(props.route.params[index]);
+        // console.log(openSocial)
+        props.navigation.navigate('Link', props.route.params[index]);
     }
 
     return (
@@ -43,7 +46,7 @@ export default function Social(props: SocialScreenProps) {
                             return (
                                 <TouchableOpacity
                                     key={index}
-                                    onPress={() => addSocial()}
+                                    onPress={() => addSocial( index ) }
                                 >
                                     <Task text={social} />
                                 </TouchableOpacity>
