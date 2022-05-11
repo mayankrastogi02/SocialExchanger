@@ -1,12 +1,14 @@
 import React from "react";
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 
 const Task = (props) => {
-
+    let imgsrc = './' + props.text + '.png';
+    console.log(imgsrc);
     return (
         <View style={styles.item}>
             <View style={styles.itemLeft}>
-                <View style={styles.square}></View>
+                <View style={styles.square}>
+                </View>
                 <Text style={styles.itemText}>{props.text}</Text>           
             </View>
             <View style={styles.circular}></View>

@@ -28,12 +28,12 @@ export default function Link(props: LinkScreenProps) {
     const socialLinks = []
 
     const handleAddTask = () => {
-        console.log(task)
+        console.log(link)
         Keyboard.dismiss()
-        if (task != null) {
+        if (link) {
             props.route.params.link = link
-            console.log(props.route.params.link)
-            console.log(props.route.params)
+            // console.log(props.route.params.link)
+            // console.log(props.route.params)
             props.navigation.navigate('Home', props.route.params)
         } else {
             console.log(open)
