@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import Task from '../components/Tasks.js'
 import React, { useState } from 'react'
+import QRCode from 'react-native-qrcode-svg';
 
 interface CodeScreenProps {
     navigation: any,
@@ -50,6 +51,15 @@ export default function Code (props: CodeScreenProps) {
                     <Text style={styles.sectionTitle}>Exchange it!</Text>
                 </View>
             </View>
+
+            <View style={styles.qrcode}>            
+                <QRCode
+                    value= { props.route.params.link }
+                    logoBackgroundColor='transparent'
+                    size={200}
+                />
+            </View>
+
             <Pressable
                 style={[styles.button, styles.deletebuttonClose]}
                 onPress={() => handleDeleteTask()}
@@ -142,6 +152,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
+    },
+    qrcode: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+        marginBottom: 300
     },
     modalView: {
         margin: 20,
