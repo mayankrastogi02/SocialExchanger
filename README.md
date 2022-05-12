@@ -26,7 +26,7 @@ Simply add your social handles and share them with your friends in a simple clic
  </ul>
  
  
- ## 📷 Screenshots
+ ## 📷 Screenshots + Demo
  
  |QR Code Screen|Home Screen|
 | :-------------------------------------------------: | :-------------------------------------------------: |
