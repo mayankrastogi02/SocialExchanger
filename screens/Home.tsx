@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
+import LinearGradient from 'react-native-linear-gradient'
 import {
     StyleSheet,
     Text,
@@ -11,63 +12,70 @@ import {
     Pressable,
     Alert,
     Platform,
+    ImageBackground,
 } from 'react-native'
 import Task from '../components/Tasks.js'
 import React, { useState } from 'react'
 import AppNavigator from '../app.navigator'
 
 interface HomeScreenProps {
-    navigation: any,
+    navigation: any
     route: { params }
 }
 
 export default function Home(props: HomeScreenProps) {
-    const [task, setTask] = useState()
-    const [taskItems, setTaskItems] = useState([])
-    const socials = ['Instagram', 'Snapchat', 'Twitter']
     const [socialLinks, setLinks] = useState([
-        {social: 'Instagram', id: 0, link: ''},
-        {social: 'Snapchat', id: 1, link: ''},
-        {social: 'Twitter', id: 2, link: ''},
-    ]);
+        { social: 'Instagram', id: 0, link: '' },
+        { social: 'Snapchat', id: 1, link: '' },
+        { social: 'Twitter', id: 2, link: '' },
+    ])
 
     const handleAddTask = (socialLinks) => {
-        console.log(socialLinks);
-        props.navigation.navigate('Social', socialLinks);
+        props.navigation.navigate('Social', socialLinks)
     }
 
     const exchangeSocial = (item) => {
-    //     let itemsCopy = [...taskItems]
-    //     itemsCopy.splice(index, 1)
-    //     setTaskItems(itemsCopy)
-    //     {
-    //         /*Copy taskItems into itemsCopy, splice pops the index from array, 
-    // set the remaining tasks into itemsCopy and call setTaskItems*/
-    //     }
-    console.log(item);
-    props.navigation.navigate('Code', item);
+        props.navigation.navigate('Code', item)
     }
+
+    const image = require('../resources/img/white-gradient.jpg')
 
     return (
         <View style={styles.container}>
+            {/* <ImageBackground
+                source={image}
+                resizeMode="cover"
+                style={styles.image}
+            > */}
             {/* <AppNavigator /> */}
             {/* Today's tasks */}
             <View style={styles.taskWrapper}>
                 <Text style={styles.sectionTitle}>Your Socials</Text>
                 <View style={styles.items}>
                     {/*This is where the tasks will go*/}
-                    {socialLinks.map((item, index) => { 
-                        console.log("Yoohoo")
-                        console.log(socialLinks)
-                        if(item.link){
-                        return (
-                            <TouchableOpacity
-                                key={index}
-                                onPress={() => exchangeSocial(item)}
-                            >
-                                <Task text={item.social} />
-                            </TouchableOpacity>
-                        )}
+                    {
+                    socialLinks.map((item, index) => {
+                        var count = 0
+                        if (item.link) {
+                            return (
+                                <TouchableOpacity
+                                    key={index}
+                                    onPress={() => exchangeSocial(item)}
+                                >
+                                    <Task text={item.social} />
+                                </TouchableOpacity>
+                            )
+                        } else {
+                            ++count
+                            console.log(count)
+                        }
+                        if (count == 3) {
+                            return (
+                                <Text style={styles.sectionTitle}>
+                                    Add a social
+                                </Text>
+                            )
+                        }
                     })}
                 </View>
             </View>
@@ -81,6 +89,7 @@ export default function Home(props: HomeScreenProps) {
                     </View>
                 </TouchableOpacity>
             </View>
+            {/* </ImageBackground> */}
         </View>
     )
 }
@@ -88,7 +97,10 @@ export default function Home(props: HomeScreenProps) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E8EAED',
+        backgroundColor: '#F6F6F6',
+    },
+    image: {
+        flex: 1,
     },
     taskWrapper: {
         paddingTop: 80,
@@ -121,9 +133,9 @@ const styles = StyleSheet.create({
     addWrapper: {
         width: 300,
         height: 60,
-        // backgroundColor: '#fff',
-        backgroundColor: '#2196F3',
-        borderRadius: 60,
+        backgroundColor: '#000',
+        // backgroundColor: '#2196F3',
+        // borderRadius: 60,
         justifyContent: 'center',
         alignItems: 'center',
         borderColor: '#C0C0C0',

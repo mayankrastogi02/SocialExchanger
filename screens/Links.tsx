@@ -10,6 +10,7 @@ import {
     Modal,
     Pressable,
     Alert,
+    ImageBackground,
 } from 'react-native'
 import Task from '../components/Tasks.js'
 import React, { useState } from 'react'
@@ -42,6 +43,7 @@ export default function Link(props: LinkScreenProps) {
     }
 
     const [link, setLink] = useState('')
+    const image = require('../resources/img/white-gradient.jpg')
 
     return (
         <View style={styles.container}>
@@ -55,6 +57,7 @@ export default function Link(props: LinkScreenProps) {
                     <TextInput
                         style={styles.input}
                         placeholder={'Insert link here'}
+                        placeholderTextColor="black"
                         value={link}
                         onChangeText={(text) => setLink(text)}
                     />
@@ -96,7 +99,10 @@ export default function Link(props: LinkScreenProps) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E8EAED',
+        backgroundColor: '#F6F6F6',
+    },
+    image: {
+        flex: 1,
     },
     taskWrapper: {
         paddingTop: 80,
@@ -123,11 +129,12 @@ const styles = StyleSheet.create({
     },
     input: {
         paddingVertical: 15,
+        color: 'blue',
         width: 370,
         marginTop: 20,
         paddingHorizontal: 15,
-        backgroundColor: '#FFF',
-        borderRadius: 60,
+        backgroundColor: '#fff',
+        // borderRadius: 60,
         borderColor: '#C0C0C0',
         borderWidth: 2,
     },
@@ -167,7 +174,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     button: {
-        borderRadius: 20,
+        // borderRadius: 20,
         padding: 10,
         elevation: 2,
     },
@@ -175,7 +182,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F194FF',
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#000',
         position: 'absolute',
         bottom: 60,
         left: '10%',

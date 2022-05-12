@@ -9,12 +9,13 @@ import {
     Keyboard,
     Modal,
     Pressable,
+    ImageBackground,
 } from 'react-native'
 import Task from '../components/Tasks.js'
 import React, { useState } from 'react'
 
 interface SocialScreenProps {
-    navigation: any,
+    navigation: any
     route: { params }
 }
 
@@ -29,10 +30,12 @@ export default function Social(props: SocialScreenProps) {
     const addSocial = (index) => {
         // console.log(socialLinks);
         // console.log(social);
-        console.log(props.route.params[index]);
+        console.log(props.route.params[index])
         // console.log(openSocial)
-        props.navigation.navigate('Link', props.route.params[index]);
+        props.navigation.navigate('Link', props.route.params[index])
     }
+
+    const image = require('../resources/img/white-gradient.jpg')
 
     return (
         <View style={styles.container}>
@@ -46,7 +49,7 @@ export default function Social(props: SocialScreenProps) {
                             return (
                                 <TouchableOpacity
                                     key={index}
-                                    onPress={() => addSocial( index ) }
+                                    onPress={() => addSocial(index)}
                                 >
                                     <Task text={social} />
                                 </TouchableOpacity>
@@ -68,7 +71,10 @@ export default function Social(props: SocialScreenProps) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E8EAED',
+        backgroundColor: '#F6F6F6',
+    },
+    image: {
+        flex: 1,
     },
     taskWrapper: {
         paddingTop: 80,
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     button: {
-        borderRadius: 20,
+        borderRadius: 0,
         padding: 10,
         elevation: 2,
     },
@@ -142,7 +148,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F194FF',
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#000',
         position: 'absolute',
         bottom: 60,
         left: '10%',

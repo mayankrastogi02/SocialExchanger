@@ -10,17 +10,18 @@ import {
     Modal,
     Pressable,
     Alert,
+    ImageBackground,
 } from 'react-native'
 import Task from '../components/Tasks.js'
 import React, { useState } from 'react'
-import QRCode from 'react-native-qrcode-svg';
+import QRCode from 'react-native-qrcode-svg'
 
 interface CodeScreenProps {
-    navigation: any,
+    navigation: any
     route: { params }
 }
 
-export default function Code (props: CodeScreenProps) {
+export default function Code(props: CodeScreenProps) {
     const [task, setTask] = useState(String)
     const [taskItems, setTaskItems] = useState([])
     const [open, setOpen] = useState(false)
@@ -32,16 +33,17 @@ export default function Code (props: CodeScreenProps) {
         console.log(task)
         Keyboard.dismiss()
         if (task != null) {
-            props.route.params.link = '';
+            props.route.params.link = ''
             console.log(props.route.params.link)
             console.log(props.route.params)
-            props.navigation.navigate('Home', props.route.params)
+            props.navigation.navigate('Home')
         } else {
             console.log(open)
             setOpen(true)
         }
     }
 
+    const image = require('../resources/img/white-gradient.jpg')
 
     return (
         <View style={styles.container}>
@@ -52,10 +54,10 @@ export default function Code (props: CodeScreenProps) {
                 </View>
             </View>
 
-            <View style={styles.qrcode}>            
+            <View style={styles.qrcode}>
                 <QRCode
-                    value= { props.route.params.link }
-                    logoBackgroundColor='transparent'
+                    value={props.route.params.link}
+                    logoBackgroundColor="transparent"
                     size={200}
                 />
             </View>
@@ -68,7 +70,9 @@ export default function Code (props: CodeScreenProps) {
             </Pressable>
             <Pressable
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => props.navigation.navigate('Home', props.route.params)}
+                onPress={() =>
+                    props.navigation.navigate('Home', props.route.params)
+                }
             >
                 <Text style={styles.textStyle}>Done</Text>
             </Pressable>
@@ -102,7 +106,10 @@ export default function Code (props: CodeScreenProps) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E8EAED',
+        backgroundColor: '#F6F6F6',
+    },
+    image: {
+        flex: 1,
     },
     taskWrapper: {
         paddingTop: 80,
@@ -158,7 +165,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
-        marginBottom: 300
+        marginBottom: 300,
     },
     modalView: {
         margin: 20,
@@ -176,7 +183,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     button: {
-        borderRadius: 20,
+        borderRadius: 0,
         padding: 10,
         elevation: 2,
     },
@@ -184,7 +191,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F194FF',
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#000',
         position: 'absolute',
         bottom: 60,
         left: '10%',
@@ -195,7 +202,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     deletebuttonClose: {
-        backgroundColor: '#F31B1B',
+        // backgroundColor: '#F31B1B',
+        backgroundColor: '#Bd9883',
         position: 'absolute',
         bottom: 130,
         left: '10%',
