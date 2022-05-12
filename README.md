@@ -5,25 +5,17 @@ No more verbally spelling out your username, no more counting the number of dots
 Simply add your social handles and share them with your friends in a simple click 📸
 
 ## 📖 Instructions
-<ol>
-  <li>Clone project
-    <li>Run
-            
-      npm install
-            
-<li>Run
+- `Clone Repository`
+- Run `npm install`
+- Run `npm start`
   
-      npm start
-  
-  </ol>
-  
-  ## 🧰 Tech Stack
-  <ul>
-  <li>React Native
-    <li>TypeScript
-      <li>JavaScript
-        <li>CSS
-          <li>npm
+## 🧰 Tech Stack
+<ul>
+<li>React Native
+  <li>TypeScript
+    <li>JavaScript
+      <li>CSS
+        <li>npm
 </ul>      
   
   ## 🛠️ Features
